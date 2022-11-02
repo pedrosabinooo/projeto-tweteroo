@@ -1,4 +1,4 @@
-import express, {json} from "express";
+import express, { json } from "express";
 import cors from "cors";
 
 const app = express();
@@ -9,19 +9,27 @@ const users = [];
 const tweets = [];
 
 app.post("/sign-up", (req, res) => {
-  const {username, avatar} = req.body;
-  if(!username || !avatar) {
+  const { username, avatar } = req.body;
+  if (!username || !avatar) {
     res.status(400).send("Todos os campos são obrigatórios!");
     return;
   }
 
-  users.push({username, avatar});
-  res.status(200).send("Usuário cadastrado com sucesso!");
+  users.push({ username, avatar });
+  res.status(201).send("Usuário cadastrado com sucesso!");
 });
 
-// app.post("/tweets", (req, res) => {
-//   res.send(userInfo);
-// });
+app.post("/tweets", (req, res) => {
+  const { username, tweet } = req.body;
+  if (!username || !tweet) {
+    res.status(400).send("Todos os campos são obrigatórios!");
+    return;
+  }
+
+  const avatar = users.find((user) => user.username === username).avatar;
+  tweets.push({ tweet, username, avatar });
+  res.status(201).send("Tweet criado com sucesso!");
+});
 
 // app.get("/tweets", (req, res) => {
 //   res.send(userInfo);
