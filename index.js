@@ -28,11 +28,11 @@ app.post("/tweets", (req, res) => {
 
   const avatar = users.find((user) => user.username === username).avatar;
   tweets.push({ tweet, username, avatar });
-  res.status(201).send("Tweet criado com sucesso!");
+  res.status(201).send("OK");
 });
 
 // app.get("/tweets", (req, res) => {
-//   res.send(userInfo);
+//   res.send(tweets);
 // });
 
 app.listen(5000, () => console.log("Server running on port 5000!"));
